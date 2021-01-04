@@ -14,8 +14,9 @@
 	<name>restful-web-service-example</name>
 	<description>Demo project for Spring Boot Restful web service</description>
 
+<!--  TODO: Change to java11-->
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 
 	<dependencies>
