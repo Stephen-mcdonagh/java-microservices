@@ -1,15 +1,20 @@
 package com.java.microservices.project.restfulwebserviceexample.Controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import com.java.microservices.project.restfulwebserviceexample.Bean.HelloWorldBean;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
 
-	@RequestMapping(method = RequestMethod.GET, path = "/hello")
+	@GetMapping( path = "/hello")
 	public String getHelloWorld (){
 		return "hello World !";
+	}
+
+	@GetMapping( path = "/hello-bean")
+	public HelloWorldBean getHelloWorldBean (){
+		return new HelloWorldBean("Bean Test");
 	}
 
 }
