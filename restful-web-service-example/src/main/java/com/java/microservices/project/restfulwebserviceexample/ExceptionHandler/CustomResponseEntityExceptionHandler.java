@@ -1,6 +1,8 @@
 package com.java.microservices.project.restfulwebserviceexample.ExceptionHandler;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +39,18 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
 		return new ResponseEntity(response,HttpStatus.NOT_FOUND);
 	}
+
+	//ex.getMessage can be changed to not include so much info
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
+		ExceptionResponse response = new ExceptionResponse(
+				new Date(),
+//				ex.getMessage(),
+				"Validation failed ",
+				ex.getBindingResult().toString()
+		);
+
+		return new ResponseEntity(response,HttpStatus.BAD_REQUEST);	}
 
 	//TODO: Add extra cases
 }

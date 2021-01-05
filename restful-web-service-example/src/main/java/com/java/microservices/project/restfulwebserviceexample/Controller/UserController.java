@@ -3,10 +3,12 @@ import com.java.microservices.project.restfulwebserviceexample.ExceptionHandler.
 import com.java.microservices.project.restfulwebserviceexample.Model.User;
 import com.java.microservices.project.restfulwebserviceexample.Service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class UserController {
 	}
 
 	@PostMapping("/users")
-	public ResponseEntity cerateUser(@RequestBody User user){
+	public ResponseEntity createUser(@Valid @RequestBody User user){
 		User savedUser = userDaoService.saveUser(user);
 		URI location = ServletUriComponentsBuilder
 				.fromCurrentRequest()
@@ -40,5 +42,13 @@ public class UserController {
 				.buildAndExpand(savedUser.getId()).toUri();
 
 		return ResponseEntity.created(location).build();
+	}
+
+	@DeleteMapping("/users/{id}")
+	public void deleteUser(@PathVariable int id){
+		User userToBeDeleted = userDaoService.deleteById(id);
+		if(userToBeDeleted == null){
+			throw new UserNotFoundException("id- " + id);
+		}
 	}
 }

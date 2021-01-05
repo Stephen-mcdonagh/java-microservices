@@ -2,6 +2,8 @@ package com.java.microservices.project.restfulwebserviceexample.Model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Getter
@@ -10,7 +12,9 @@ import java.util.Date;
 public class User {
 
 	private Integer id;
+	@Size(min = 2, max = 30, message = "Name should have at least 2 characters and no more than 30")
 	private String name;
+	@Past(message = "Date of birth must be in the past")
 	private Date dateOfBirth;
 
 	protected User(){}
