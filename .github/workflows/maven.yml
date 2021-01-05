@@ -21,5 +21,4 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven
-      run: cd restful-web-service-example
-        mvn -B package --file pom.xml
+      run: mvn -B package --file restful-web-service-example/pom.xml
