@@ -1,10 +1,12 @@
 package com.java.microservices.project.restfulwebserviceexample.Service;
 import com.java.microservices.project.restfulwebserviceexample.Model.User;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class UserDaoService {
 
 	private static List<User> users = new ArrayList<>();
@@ -13,14 +15,13 @@ public class UserDaoService {
 	static {
 		users.add(new User(1,"Stephen", new Date()));
 		users.add(new User(2,"Anna", new Date()));
-
 	}
 
-	public List<User> getAllUsers(){
+	public List<User> findAll(){
 		return users;
 	}
 
-	public User getUserById(int id){
+	public User findUserById(int id){
 		for(User user : users){
 			if(user.getId()==id){
 				return user;

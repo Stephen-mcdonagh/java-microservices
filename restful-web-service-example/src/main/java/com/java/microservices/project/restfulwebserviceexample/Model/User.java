@@ -13,6 +13,15 @@ public class User {
 	private String name;
 	private Date dateOfBirth;
 
-	public User(int i, String stephen, Date date) {
+	public User(Integer id, String name, Date dateOfBirth) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	@Override
+	public String toString(){
+		return String.format("User [id=%s,name=%s, dateOfBirth=%s]", id,name,dateOfBirth);
 	}
 }
