@@ -3,7 +3,8 @@ import com.java.microservices.project.restfulwebserviceexample.ExceptionHandler.
 import com.java.microservices.project.restfulwebserviceexample.Model.User;
 import com.java.microservices.project.restfulwebserviceexample.Service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -11,6 +12,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class UserController {
@@ -24,13 +28,20 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{id}")
-	public User getUserById(@PathVariable int id){
+	public EntityModel<User> retrieveUser(@PathVariable int id){
 		User user =  userDaoService.findUserById(id);
 		if(user==null){
 			throw new UserNotFoundException("id = " + id);
 		}
 
-		return user;
+		//Returns back a link to all the users too
+		EntityModel<User> resource = EntityModel.of(user);
+
+		WebMvcLinkBuilder linkTo =
+				linkTo(methodOn(this.getClass()).getAllUsers());
+
+		resource.add(linkTo.withRel("all-users"));
+		return resource;
 	}
 
 	@PostMapping("/users")

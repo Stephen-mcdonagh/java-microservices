@@ -1,4 +1,6 @@
 package com.java.microservices.project.restfulwebserviceexample.Model;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,11 +11,14 @@ import java.util.Date;
 @Getter
 @Setter
 //Might get error with no construcor (Step 07)
+@ApiModel(description = "All users details")
 public class User {
 
 	private Integer id;
 	@Size(min = 2, max = 30, message = "Name should have at least 2 characters and no more than 30")
+	@ApiModelProperty(notes = "Size of name is between 2 & 30")
 	private String name;
+	@ApiModelProperty(notes = "Birth date cannot be in the past")
 	@Past(message = "Date of birth must be in the past")
 	private Date dateOfBirth;
 
