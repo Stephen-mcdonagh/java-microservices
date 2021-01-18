@@ -3,7 +3,6 @@ import com.java.microservices.project.restfulwebserviceexample.ExceptionHandler.
 import com.java.microservices.project.restfulwebserviceexample.Model.User;
 import com.java.microservices.project.restfulwebserviceexample.Repository.PostRepository;
 import com.java.microservices.project.restfulwebserviceexample.Repository.UserRepository;
-import com.java.microservices.project.restfulwebserviceexample.Service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;

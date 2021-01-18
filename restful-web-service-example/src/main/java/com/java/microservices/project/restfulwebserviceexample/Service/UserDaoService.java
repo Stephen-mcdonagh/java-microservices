@@ -15,10 +15,10 @@ public class UserDaoService {
 	private static List<User> users = new ArrayList<>();
 	private static int count=2;
 
-//	static {
-//		users.add(new User(1,"Stephen", new Date()));
-//		users.add(new User(2,"Anna", new Date()));
-//	}
+	static {
+		users.add(new User(1,"Stephen", new Date()));
+		users.add(new User(2,"Anna", new Date()));
+	}
 
 	public List<User> findAll(){
 		return users;
